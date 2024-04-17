@@ -54,6 +54,8 @@ build_index_image(){
 build_index(){
   export operator=$1
   export max_version=$2
+  #example: ptp-operator.v4.14.0-200000000000, in order to fix the issue that sriov-network-operator 4.13 bundles exists in 4.14 index
+  export minimal_version="$operator.v$OCP_VERSION.0-200000000000"
   local op_workspace="$workspace/$operator"/"$max_version"
   mkdir -p "$op_workspace"
 
@@ -94,7 +96,7 @@ build_index(){
 
   echo "[$operator]: generating olm-bundles version <= $max_version."
   #get olm.bundles lower than $max_version
-  yq '. | select(.schema=="olm.bundle" and .package == env(operator) and .name <= env(max_version))' "$full_index" > "$op_workspace"/olm-bundles.yaml
+  yq '. | select(.schema=="olm.bundle" and .package == env(operator) and .name > env(minimal_version) and .name <= env(max_version))' "$full_index" > "$op_workspace"/olm-bundles.yaml
 
   echo "---" >> $tuned_index
   cat "$op_workspace"/olm-package.yaml >> $tuned_index
