@@ -96,7 +96,7 @@ build_index(){
   #get olm.bundles lower than $max_version
   yq '. | select(.schema=="olm.bundle" and .package == env(operator) and .name <= env(max_version))' "$full_index" > "$op_workspace"/olm-bundles.yaml
 
-  echo "---" > $tuned_index
+  echo "---" >> $tuned_index
   cat "$op_workspace"/olm-package.yaml >> $tuned_index
   echo "---" >> $tuned_index
   cat "$op_workspace"/olm-channel.yaml >> $tuned_index
