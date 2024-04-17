@@ -83,10 +83,10 @@ build_index(){
     sed  "s/name: ${entry_name_latest}/name: ${entry_name_keep}/g" "$op_workspace"/olm-channel-updated-0.yaml > "$op_workspace"/olm-channel-updated-1.yaml
     sed  "s/skipRange: '${entry_skipRange_latest}'/skipRange: '${entry_skipRange_keep}'/g" "$op_workspace"/olm-channel-updated-1.yaml > "$op_workspace"/olm-channel-updated-2.yaml
 
-    echo "[$operator]: deleting entries which version is bigger than $max_version in olm-channel."
+    echo "[$operator]: deleting entries whose version is greater than $max_version in olm-channel."
     yq 'del( .entries[] |select(.name > env(max_version)))' "$op_workspace"/olm-channel-updated-2.yaml > "$op_workspace"/olm-channel-updated-3.yaml
 
-    echo "[$operator]: deleting versions bigger than $max_version from the skips in olm-channel."
+    echo "[$operator]: deleting versions greater than $max_version from the skips in olm-channel."
     yq '.entries[]| select(.name == env(max_version)).skips |del(.[] | select(. >= env(max_version)))|parent|parent|parent' "$op_workspace"/olm-channel-updated-3.yaml  > "$op_workspace"/olm-channel.yaml
   fi
 
