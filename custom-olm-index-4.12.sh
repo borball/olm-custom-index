@@ -8,7 +8,7 @@ LOCAL_REGISTRY="hub-helper:5000"
 LOCAL_REPOSITORY="operators"
 
 declare -A OPERATORS=(
-  ["ptp-operator"]="ptp-operator.v4.12.0-202402081808"
+  ["ptp-operator"]="ptp-operator.4.12.0-202402081808"
   ["local-storage-operator"]="local-storage-operator.v4.12.0-202403082008"
   ["sriov-network-operator"]="sriov-network-operator.v4.12.0-202402081808"
   )
