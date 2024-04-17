@@ -22,6 +22,8 @@ tuned_index="$workspace/$INDEX_NAME/index.yaml"
 init(){
   echo "creating workspace: $workspace/$INDEX_NAME."
   mkdir -p "$workspace/$INDEX_NAME"
+  touch "$tuned_index"
+  > "$tuned_index"
 }
 
 get_full_index(){
@@ -109,6 +111,7 @@ get_full_index
 
 echo
 echo "processing olm files:"
+
 for key in "${!OPERATORS[@]}"; do
   build_index "$key" "${OPERATORS[$key]}"
   echo
