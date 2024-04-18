@@ -55,7 +55,7 @@ build_index(){
   export operator=$1
   export max_version=$2
   #example: ptp-operator.v4.14.0-200000000000, in order to fix the issue that sriov-network-operator 4.13 bundles exists in 4.14 index
-  export minimal_version="$operator.v$OCP_VERSION.0-200000000000"
+  export minimal_version=$(echo $max_version|sed -E "s/([0-9]{12})/200000000000/")
   local op_workspace="$workspace/$operator"/"$max_version"
   mkdir -p "$op_workspace"
 
