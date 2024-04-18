@@ -83,7 +83,7 @@ build_index(){
     echo "[$operator]: deleting $max_version from the entries in olm-channel."
     yq 'del( .entries[] |select(.name == env(max_version)))' "$op_workspace"/olm-channel-original.yaml > "$op_workspace"/olm-channel-updated-0.yaml
 
-    echo "[$operator]: renaming $entry_name_latest to $max_version in olm-channel."
+    echo "[$operator]: patching \"latest\" to point instead of $entry_name_latest to $max_version in olm-channel."
     sed  "s/name: ${entry_name_latest}/name: ${entry_name_keep}/g" "$op_workspace"/olm-channel-updated-0.yaml > "$op_workspace"/olm-channel-updated-1.yaml
     sed  "s/skipRange: '${entry_skipRange_latest}'/skipRange: '${entry_skipRange_keep}'/g" "$op_workspace"/olm-channel-updated-1.yaml > "$op_workspace"/olm-channel-updated-2.yaml
 
