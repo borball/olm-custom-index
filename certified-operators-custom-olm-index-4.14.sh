@@ -2,7 +2,7 @@
 
 OCP_VERSION=4.14
 INDEX_NAME=certified-operator-index
-#example: registry.redhat.io/redhat/redhat-operator-index:v4.12
+#example: registry.redhat.io/redhat/redhat-operator-index:v4.14
 INDEX_LOCATION=registry.redhat.io/redhat/$INDEX_NAME:v$OCP_VERSION
 LOCAL_REGISTRY="hub-helper:5000"
 LOCAL_REPOSITORY="operators"
